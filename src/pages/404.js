@@ -3,8 +3,9 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const NotFoundPage = () => (
+const NotFoundPage = ({ data }) => (
   <Layout>
+    {data.sitePage.id}
     <SEO title="404: Not found" />
     <h1>NOT FOUND</h1>
     <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
@@ -12,3 +13,12 @@ const NotFoundPage = () => (
 )
 
 export default NotFoundPage
+
+export const pageQuery = graphql`
+  query($path: String!) {
+    sitePage(path: { eq: $path }) {
+      id
+      path
+    }
+  }
+`

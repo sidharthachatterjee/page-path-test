@@ -5,8 +5,9 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
+const IndexPage = ({ data }) => (
   <Layout>
+    {data.sitePage.id}
     <SEO title="Home" />
     <h1>Hi people</h1>
     <p>Welcome to your new Gatsby site.</p>
@@ -19,3 +20,12 @@ const IndexPage = () => (
 )
 
 export default IndexPage
+
+export const pageQuery = graphql`
+  query($path: String!) {
+    sitePage(path: { eq: $path }) {
+      id
+      path
+    }
+  }
+`
